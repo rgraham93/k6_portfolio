@@ -3,6 +3,7 @@ import { check } from "k6";
 import { WorkloadConfig, EnvConfig } from "./config/configs.js";
 import { setupOptionsAndUrls } from "../../utils/setup.js";
 
+// Options would be set up through a setupOptionsAndUrls helper function located in the utils folder
 const optionsSetup = setupOptionsAndUrls(WorkloadConfig, EnvConfig, "generate");
 export const options = {
     scenarios: {
@@ -28,6 +29,7 @@ export function generateCCD() {
         headers: {
             "Content-Type": "application/json",
         },
+        // k6 has a default timeout set to 30 seconds, if the request is expected to take longer to process, you can override the default
         timeout: "600s",
     }
 

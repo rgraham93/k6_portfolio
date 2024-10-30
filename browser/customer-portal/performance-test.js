@@ -50,7 +50,7 @@ let file;
   file = await open("./data/TomSawyer.pdf");
 })();
 
-// Get the current date in MM/DD/YYYY format to be used throughout the test
+// Get the current date in MMDDYYYY format to be used throughout the test
 let currentDate = new Date();
 const formattedCurrentDate = formatDateToMMDDYYYY(currentDate);
 
