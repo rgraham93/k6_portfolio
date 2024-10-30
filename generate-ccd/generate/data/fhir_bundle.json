@@ -1,0 +1,79 @@
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "fullUrl": "urn:uuid:12345",
+            "resource": {
+                "resourceType": "Patient",
+                "id": "12345",
+                "identifier": [
+                    {
+                        "use": "usual",
+                        "system": "http://hospital.smarthealthit.org",
+                        "value": "123456"
+                    }
+                ],
+                "name": [
+                    {
+                        "use": "official",
+                        "family": "Doe",
+                        "given": [
+                            "John"
+                        ]
+                    }
+                ],
+                "gender": "male",
+                "birthDate": "1980-01-01",
+                "address": [
+                    {
+                        "use": "home",
+                        "line": [
+                            "123 Elm Street"
+                        ],
+                        "city": "Somewhere",
+                        "state": "CA",
+                        "postalCode": "90210",
+                        "country": "USA"
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Patient"
+            }
+        },
+        {
+            "fullUrl": "urn:uuid:67890",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "67890",
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "8302-2",
+                            "display": "Body Height"
+                        }
+                    ],
+                    "text": "Body Height"
+                },
+                "subject": {
+                    "reference": "Patient/12345"
+                },
+                "effectiveDateTime": "2023-10-28T10:00:00Z",
+                "valueQuantity": {
+                    "value": 180,
+                    "unit": "cm",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "cm"
+                }
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        }
+    ]
+}

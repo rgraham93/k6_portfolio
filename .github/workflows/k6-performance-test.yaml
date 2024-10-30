@@ -1,0 +1,52 @@
+name: Performance Testing
+run-name: "Performance Testing for ${{ inputs.performance_test_path }} by @${{ github.actor }} Branch: ${{ github.ref_name }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      performance_test_path:
+        description: "Performance Test Path"
+        required: false
+        default: "generate-ccd/generate"
+        type: choice
+        options:
+          - browser
+          - generate-ccd/generate
+      WORKLOAD:
+        description: "Workload (or Traffic) Type"
+        required: false
+        default: "load"
+        type: choice
+        options:
+          - breakpoint
+          - load
+          - soak
+          - spike
+          - stress
+      CONFIG_ENV:
+        description: "CONFIG_ENV"
+        required: false
+        default: "qa"
+        type: choice
+        options:
+          - qa
+          - test
+      prometheus_write:
+        description: "Push metrics to prometheus nonprod"
+        required: false
+        default: true
+        type: boolean
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  performance_testing:
+    if: github.event_name == 'workflow_dispatch'
+    uses: rgraham/github-actions/.github/workflows/k6-performance-testing.yaml@main
+    with:
+      project: ${{ inputs.performance_test_path }}
+      runner_group: perf-test-k8s-runner
+      performance_test_path: ${{ inputs.performance_test_path }}/performance-test.js
+      WORKLOAD: ${{ inputs.WORKLOAD }}
+      CONFIG_ENV: ${{ inputs.CONFIG_ENV }}
+      prometheus_write: ${{ inputs.prometheus_write }}
