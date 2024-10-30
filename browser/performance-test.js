@@ -8,6 +8,7 @@ import { WorkloadConfig, EnvConfig } from "./config/configs.js";
 import { readAll } from "../../utils/file-buffer.js";
 import { formatDateToMMDDYYYY } from "../../utils/date-helpers.js";
 
+// Test options would be set up here by referencing the WorkloadConfig and EnvConfig data 
 const optionsSetup = setupOptionsAndUrls(
   WorkloadConfig,
   EnvConfig,
@@ -30,7 +31,7 @@ export const options = {
   tags: optionsSetup.options.tags,
 };
 
-// Retrieves a username and password from AWS Secrets to be used to log into the application
+// The getSecret is a function that retrieves a username and password from AWS Secrets to be used to log into the application
 export function setup() {
   const secrets = getSecret(
     optionsSetup.testSecretName,
@@ -72,7 +73,7 @@ export async function createCustomerRequest(data) {
 
     // Look up customer
     await requestsPage.customerLookup("sawyer");
-    await requestsPage.enterMemberId("1234567890");
+    await requestsPage.enterCustomerId("1234567890");
 
     // Look up location
     await requestsPage.locationLookup("location");
