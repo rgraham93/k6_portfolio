@@ -36,8 +36,8 @@ on:
         required: false
         default: true
         type: boolean
-  schedule:
-    - cron: '0 0 * * *'
+  # schedule:
+  #   - cron: '0 0 * * *'
 
 jobs:
   performance_testing:
